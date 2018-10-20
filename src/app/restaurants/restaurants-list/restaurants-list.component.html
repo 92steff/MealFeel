@@ -1,0 +1,8 @@
+<ng-template [ngIf]="(restaurantsState | async).showRestaurants">
+    <app-restaurant-item 
+        *ngFor="let place of (restaurantsState | async).restaurants"
+        [placeContent]="place"
+        [routerLink]="'/restaurants/' + place.name"
+        (click)="onSelectRestaurant(place)">
+    </app-restaurant-item>
+</ng-template>

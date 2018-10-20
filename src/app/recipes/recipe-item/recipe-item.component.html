@@ -1,0 +1,20 @@
+<div class="col-md-3 col-sm-6">
+  
+    <div class="thumbnail">
+      <a (click)="onSelectRecipe(recipeResponse)">
+        <div class="caption">
+          {{recipeResponse.recipe.label}}
+        </div>
+
+        <img 
+          [src]="recipeResponse.recipe.image"
+          alt="recipeResponse.recipe.label"
+          class="img-responsive">    
+
+        <div class="caption">
+          More info <span class="double-arrow">>></span>
+        </div>
+
+      </a>
+    </div>
+</div>

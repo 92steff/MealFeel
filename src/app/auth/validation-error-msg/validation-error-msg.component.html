@@ -1,0 +1,5 @@
+<div class="invalid-input" *ngIf="displayErrorField">
+  <span *ngIf="!displayErrorMsg">This field is required!<br></span>
+  <span *ngIf="displayErrorMsg">{{errorMsg}}</span>
+  <hr>
+</div>

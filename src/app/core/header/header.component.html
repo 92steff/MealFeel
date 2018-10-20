@@ -1,0 +1,45 @@
+<div class="navbar navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+          <div class="navbar-header">
+              <a routerLink="/" class="navbar-brand">MealFeel</a>
+            </div>
+      </div>
+      
+      <div class="collapsible-menu">
+        <input type="checkbox" id="menu">
+        <label for="menu"></label>
+        <div class="menu-content">
+
+      <div class="col-md-3">
+        <ul class="nav navbar-nav">
+          <li><a routerLink="/recipes">Recipes</a></li>
+          <li class="dash">|</li>
+          <li><a routerLink="/restaurants">Restaurants</a></li>
+        </ul>
+      </div>
+    
+      <div class="col-md-7 navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+
+          <ng-template [ngIf]="!(authState | async).authenticated">
+            <li><a routerLink="/sign-in">Sign in</a></li>
+            <li class="dash">|</li>
+            <li><a routerLink="/sign-up">Sign up</a></li>
+          </ng-template>
+          
+          <ng-template [ngIf]="(authState | async).authenticated">
+            <li><a routerLink="/myProfile">{{(userState | async).username}}</a></li>
+            <li class="dash">|</li>
+            <li><a (click)=logout()>Logout</a></li>
+          </ng-template>
+          
+        </ul>
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+

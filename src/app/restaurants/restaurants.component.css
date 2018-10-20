@@ -1,0 +1,34 @@
+agm-map {
+    width:500px;
+    height:500px;
+}
+
+.margin-fix {
+    margin:20px 0;
+}
+
+input {
+    width:80%;
+    display: inline;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+button {
+    vertical-align: bottom;
+}
+
+form, 
+.form-control {
+    margin-top:0;
+}
+
+.mapHolder {
+    width:100%;
+    border: 2px solid #454555;
+    border-radius:4px;
+}
+
+agm-map {
+    width: 100%;
+}

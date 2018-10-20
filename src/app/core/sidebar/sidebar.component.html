@@ -1,0 +1,33 @@
+<div class="sidebar">
+  <div class="container-fluid">
+      <div class="holder">
+        <h4 class="text-center">Choose your ingredients</h4>
+        <form (ngSubmit)="onSearchRecipes()">
+
+          <div class="grid-container">
+            <div class="grid-input">
+              <input type="text" class="form-control" #ing>
+            </div>
+            
+            <div class="grid-add-btn">
+              <button type="button" (click)="onAddIngredient()" class="btn btn-warning form-control">Add</button>
+            </div>
+
+            <div class="grid-search-btn">
+              <button type="submit" class="btn btn-warning form-control">Search</button>
+            </div>
+  
+          </div>
+        
+        </form>
+            
+      </div>
+
+        <div class="alert alert-warning alert-dismissible" *ngFor="let ing of ingArr; let i = index">
+          <a (click)="onDeleteIngredient(i)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ing}}
+        </div>
+
+  </div>
+  
+</div>

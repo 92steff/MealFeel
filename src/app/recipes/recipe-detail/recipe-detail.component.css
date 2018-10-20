@@ -1,0 +1,79 @@
+img {
+    max-height:500px;
+}
+
+button {
+    min-width: 65px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 10% 70% 20%;
+    grid-template-rows: 50% 50%;
+}
+
+.grid-btn {
+    margin-top:25px;
+    grid-column:1;
+    grid-row:1;
+}
+
+.grid-heading {
+    font-size: 30px;
+    text-align: center;
+    grid-column:2;
+    grid-row:2;
+}
+
+.grid-favorite {
+    font-size:20px;
+    grid-column: 3;
+    grid-row:2;
+    text-align: right;
+}
+
+.grid-favorite:hover .star-empty{
+    content: url('../../../assets/star-filled.png');
+}
+
+.star {
+    width:30px;
+    vertical-align: bottom;
+    color:yellow;
+}
+
+.star-empty {
+    content: url('../../../assets/star-empty.png');
+}
+
+.star-full {
+    content: url('../../../assets/star-filled.png');
+}
+
+th {
+    width:15%;
+    background-color:rgb(235,235,235);
+}
+
+@media screen and (max-width:991px) {
+    .grid-container {
+        grid-template-columns: 10% 70% 20%;
+        grid-template-rows: 50% 50%;
+        padding:0 22px;
+    }
+    
+    .grid-btn {
+        grid-column:1 / span 3;
+        margin-top:0;
+        margin-bottom:25px;
+    }
+
+    .grid-btn > button {
+        width:100%;
+    }
+
+    .grid-heading {
+        grid-column:1 / span 2;
+        text-align: left;
+    }
+}

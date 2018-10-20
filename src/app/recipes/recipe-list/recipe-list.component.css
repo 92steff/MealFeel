@@ -1,0 +1,60 @@
+.row {
+    margin-top:25px;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+ }
+ 
+ :-moz-placeholder { 
+    text-align: center;  
+ }
+ 
+ ::-moz-placeholder { 
+    text-align: center;  
+ }
+ 
+ :-ms-input-placeholder {  
+    text-align: center; 
+ }
+
+ .search-icon {
+     display: block;
+     content: url('../../../assets/loupe.png');
+     height:24px;
+     margin: auto;
+     margin-top:-4px;
+ }
+
+ .search-form {
+     display: flex;
+     flex-direction: row;
+ }
+
+ .search-form input {
+     width:100%;
+     border-top-right-radius: 0;
+     border-bottom-right-radius: 0;
+ }
+
+ .search-form button {
+     width:65px;
+     vertical-align: bottom;
+     border-top-left-radius: 0;
+     border-bottom-left-radius: 0;
+ }
+
+ .btn {
+     min-width:65px;
+ }
+
+
+ @media screen and (max-width:991px) {
+    .row {
+        padding:20px;
+    }
+
+    form {
+        margin:10px 0;
+    }
+ }
