@@ -1,6 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router';
 import * as fromApp from '../../store/app.reducers';
 import * as fromRecipe from '../store/recipes.reducer';
 import * as RecipesAction from '../store/recipes.actions';
@@ -15,14 +16,16 @@ import * as RecipesAction from '../store/recipes.actions';
 export class RecipeListComponent implements OnInit {
   recipesState:Observable<fromRecipe.State>;
   queryIndexFrom:number = 0;
-  queryIndexTo:number = 1;
-  numOfDisplays:number = 1;
+  queryIndexTo:number = 8;
+  numOfDisplays:number = 8;
   dummyIngredients = ['chicken', 'ice-cream', 'potato', 'sandwich', 'tomato', 'salad'];
   choosenIngredients:string[] = [];
+  isInRecipes:boolean;
 
-  constructor(private store:Store<fromApp.AppState>) { }
+  constructor(private store:Store<fromApp.AppState>, private route:ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.snapshot.component == RecipeListComponent ? this.isInRecipes = true : this.isInRecipes = false;
     this.recipesState = this.store.select('recipes');
     this.store.select('recipes')
       .subscribe(

@@ -17,8 +17,9 @@
           <label for="password">Password:</label><br>
           <input type="password" class="form-control" name="password" formControlName="password">
           <span class="text-danger" *ngIf="passErrorMsg && isFormSubmitted">
-            {{passErrorMsg.value || 'This field is required!'}}
+            {{passErrorMsg.value'}}
           </span>
+
         </div>
 
         <button type="submit" class="btn btn-dark">Log in</button>

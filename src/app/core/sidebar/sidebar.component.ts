@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import * as fromApp from '../../store/app.reducers';
 import * as RecipesActions from '../../recipes/store/recipes.actions';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',

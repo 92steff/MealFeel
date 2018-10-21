@@ -21,7 +21,8 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
         RecipesRoutingModule
     ],
     exports: [
-        RecipeItemComponent
+        RecipeItemComponent,
+        RecipeListComponent
     ]
 })
 
