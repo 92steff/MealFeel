@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-
 import * as fromApp from '../store/app.reducers';
 import * as RestaurantsActions from './store/restaurants.actions';
 import * as fromRestaurants from './store/restaurants.reducer';

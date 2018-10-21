@@ -18,7 +18,6 @@ export class RecipeEffects {
         )
         .switchMap(
             (reqData:{ingredientsArray:string[], fromIndex:number, toIndex:number}) => {
-                console.log('logg: heeeey');
                 let ingredients = reqData.ingredientsArray.join(',')
                 return this.httpClient.get('https://api.edamam.com/search?', {
                     observe: 'body',

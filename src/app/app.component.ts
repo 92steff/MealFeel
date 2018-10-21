@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromApp from './store/app.reducers';
 import * as authActions from './auth/store/auth.actions';
-import * as userActions from './user/store/user.actions';
 import * as firebase from 'firebase';
 
 @Component({

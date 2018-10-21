@@ -5,11 +5,12 @@
         <div class="caption">
           {{recipeResponse.recipe.label}}
         </div>
-
-        <img 
-          [src]="recipeResponse.recipe.image"
-          alt="recipeResponse.recipe.label"
-          class="img-responsive">    
+        <div class="img-wrapper">
+          <img 
+            [src]="recipeResponse.recipe.image"
+            alt="recipeResponse.recipe.label"
+            class="img-responsive"> 
+        </div>   
 
         <div class="caption">
           More info <span class="double-arrow">>></span>

@@ -29,16 +29,17 @@
 
 a, a:hover {
     text-decoration: none !important;
-    cursor: pointer;
     color: #777;
+    cursor: pointer;
 }
 
-.btn-dark {
+.btn-dark, .btn-dark:hover {
     background-color: #454555;
     color:#fff;
 }
 
-.btn-dark:hover {
+.btn-orange {
+    background-color: #ec971f;
     color:#fff;
 }
 
@@ -46,6 +47,18 @@ a, a:hover {
     border-color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+th {
+    width: 15%;
+    background-color:#fff;
+    opacity:0.8;
+}
+
+tr:hover {
+    background-color:#fff;
+    opacity:0.9;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1007px) {
@@ -58,6 +71,11 @@ a, a:hover {
 }
 
 /* ------------------ Frames and Icons ------------------ */
+
+.thumbnail {
+    background-color:#fff1db;
+    max-width: 500px;
+}
 
 .thumbnail:hover {
     box-shadow: 0 0 10px  rgb(228,228,228);

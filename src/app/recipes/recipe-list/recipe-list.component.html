@@ -1,22 +1,25 @@
-<div class="row">
-  <div class="col-md-1">
-      <button type="button" class="form-control btn btn-warning" (click)="onTurnPage('prev')">Prev</button>
-  </div>
+<ng-template [ngIf]="isInRecipes">
+    <div class="row">
+        <div class="col-md-1">
+            <button type="button" class="form-control btn btn-warning" (click)="onTurnPage('prev')">Prev</button>
+        </div>
+      
+        <div class="col-md-8 col-md-offset-1">
+            <form (ngSubmit)="onSearchRecipes()">
+                <div class="search-form">
+                    <input type="text" class="form-control" placeholder="Search for recipes">
+                    <button type="submit" class="btn btn-warning form-control"><span class="search-icon"></span></button>
+                </div>
+                
+            </form>
+        </div>
+      
+        <div class="col-md-1 col-md-offset-1">
+            <button type="button" class="form-control btn btn-warning" (click)="onTurnPage('next')">Next</button>
+        </div>
+    </div>
+</ng-template>
 
-  <div class="col-md-8 col-md-offset-1">
-      <form (ngSubmit)="onSearchRecipes()">
-          <div class="search-form">
-              <input type="text" class="form-control" placeholder="Search for recipes">
-              <button type="submit" class="btn btn-warning form-control"><span class="search-icon"></span></button>
-          </div>
-          
-      </form>
-  </div>
-
-  <div class="col-md-1 col-md-offset-1">
-      <button type="button" class="form-control btn btn-warning" (click)="onTurnPage('next')">Next</button>
-  </div>
-</div>
 
 <div class="row">
     <app-recipe-item 

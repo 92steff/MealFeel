@@ -1,5 +1,6 @@
 img {
     max-height:500px;
+    width:100%;
 }
 
 button {
@@ -48,11 +49,6 @@ button {
 
 .star-full {
     content: url('../../../assets/star-filled.png');
-}
-
-th {
-    width:15%;
-    background-color:rgb(235,235,235);
 }
 
 @media screen and (max-width:991px) {

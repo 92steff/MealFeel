@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable, OnDestroy, ViewChild} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import * as fromAuth from '../../auth/store/auth.reducer';
 import * as UserActions from '../../user/store/user.actions';
@@ -26,7 +26,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
   @ViewChild('favorite') favoriteEl:HTMLDivElement;
   @ViewChild('star') starEl:HTMLSpanElement;
 
-  constructor(private store:Store<fromApp.AppState>, private router:Router, private route:ActivatedRoute) { }
+  constructor(private store:Store<fromApp.AppState>, private router:Router) { }
 
   ngOnInit() {
     this.subscription = this.store.select('recipes')
