@@ -27,39 +27,44 @@ button {
 }
 
 .grid-favorite {
-    font-size:20px;
     grid-column: 3;
     grid-row:2;
     text-align: right;
 }
 
-.grid-favorite:hover .star-empty{
-    content: url('../../../assets/star-filled.png');
+.grid-favourite > a {
+    vertical-align: super;
+    font-size:21px;
+    color:inherit;
 }
 
-.star {
+
+.grid-favorite:hover .cookie-empty{
+    content: url('../../../assets/cookie-full.png');
+}
+
+.cookie {
     width:30px;
     vertical-align: bottom;
-    color:yellow;
 }
 
-.star-empty {
-    content: url('../../../assets/star-empty.png');
+.cookie-empty {
+    content: url('../../../assets/cookie-empty.png');
 }
 
-.star-full {
-    content: url('../../../assets/star-filled.png');
+.cookie-full {
+    content: url('../../../assets/cookie-full.png');
 }
 
 @media screen and (max-width:991px) {
     .grid-container {
-        grid-template-columns: 10% 70% 20%;
+        grid-template-columns: 50% 50%;
         grid-template-rows: 50% 50%;
         padding:0 22px;
     }
     
     .grid-btn {
-        grid-column:1 / span 3;
+        grid-column:1 / span 2;
         margin-top:0;
         margin-bottom:25px;
     }
@@ -69,7 +74,11 @@ button {
     }
 
     .grid-heading {
-        grid-column:1 / span 2;
+        grid-column:1;
         text-align: left;
+    }
+    
+    .grid-favourite {
+        grid-column:2;
     }
 }

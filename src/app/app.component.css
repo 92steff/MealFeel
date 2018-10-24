@@ -52,12 +52,10 @@ a, a:hover {
 th {
     width: 15%;
     background-color:#fff;
-    opacity:0.8;
+    opacity:0.7;
 }
 
-tr:hover {
-    background-color:#fff;
-    opacity:0.9;
+td:hover {
     cursor: pointer;
 }
 

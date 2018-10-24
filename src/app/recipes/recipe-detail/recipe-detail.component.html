@@ -5,11 +5,11 @@
     <div class="grid-heading">
         {{recipeContent.recipe.label}}
     </div>
-    <div class="grid-favorite" #favorite>
+    <div class="grid-favorite">
         <a (click)="onBookmarkRecipe()">Set as favorite 
             <span 
-            [ngClass]="{'star-full': recipeContent.bookmarked, 'star-empty': !recipeContent.bookmarked}" 
-            class="star" #star></span>
+            [ngClass]="{'cookie-full': recipeContent.bookmarked, 'cookie-empty': !recipeContent.bookmarked}" 
+            class="cookie"></span>
         </a>
     </div>
 </div>

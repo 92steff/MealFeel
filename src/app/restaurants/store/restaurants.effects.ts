@@ -61,7 +61,6 @@ export class RestaurantsEffects {
         )
         .map(
             (places:any) => {
-                console.log(places);
                 return {
                     type:RestaurantsActions.SET_RESTAURANTS,
                     payload:places
