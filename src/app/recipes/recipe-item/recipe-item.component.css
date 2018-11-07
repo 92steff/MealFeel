@@ -33,6 +33,13 @@ span {
     text-overflow: ellipsis;
 }
 
+@media only screen and (max-width: 767px) {
+    .thumbnail {
+        margin:auto;
+        margin-bottom: 50px;
+    }
+}
+
 @keyframes moving-arrow {
     from {
         opacity:0.5;

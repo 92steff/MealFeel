@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, trigger } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as fromApp from '../store/app.reducers';
@@ -12,15 +13,17 @@ import * as fromRestaurants from './store/restaurants.reducer';
 })
 
 export class RestaurantsComponent implements OnInit {
-  @ViewChild('queryEl') queryElement:ElementRef;
+  @ViewChild('queryEl') queryEl:ElementRef;
+  @ViewChild('areaEl') areaEl:ElementRef;
   restaurantsState:Observable<fromRestaurants.State>;
   lat:number;
   lng:number;
-  radius:number = 3000;
-  showMap:boolean = true;
+  radius:number = 2000;
+  showMap:boolean = false;
+  errMsg:boolean = false;
   query:string;
 
-  constructor(private store:Store<fromApp.AppState>) { }
+  constructor(private store:Store<fromApp.AppState>, private http:HttpClient) { }
 
   ngOnInit() {
     this.restaurantsState = this.store.select('restaurants');
@@ -28,8 +31,11 @@ export class RestaurantsComponent implements OnInit {
       (position) => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
+        this.showMap = true;
       }, 
-      () => {},
+      () => {
+        this.errMsg = true;
+      },
       {enableHighAccuracy: true})
   }
 
@@ -37,13 +43,35 @@ export class RestaurantsComponent implements OnInit {
    this.showMap = !this.showMap;
   }
   
+  getCoords() {
+    this.http.get('https://maps.googleapis.com/maps/api/geocode/json?', {
+      params: new HttpParams().set('address', this.areaEl.nativeElement.value)
+                              .set('key', 'AIzaSyBKQGeXCepsr3eWfUfi-7utORwYSVRd3b0')
+    })
+    .subscribe(
+      (response) => {
+        const position = response['results'][0].geometry.location;
+        this.lat = position.lat;
+        this.lng = position.lng;
+        this.showMap = true;
+      }
+    )
+  }
+
   searchForRestaurants() {
+    const queryPara = this.queryEl.nativeElement.value;
+    const areaPara = this.areaEl.nativeElement.value;
     this.store.dispatch(new RestaurantsActions.FetchRestaurants({
-      query: this.queryElement.nativeElement.value,
+      query: queryPara,
       lat: this.lat,
       lng: this.lng,
+      near: areaPara,
       radius: this.radius
     }))
-    this.queryElement.nativeElement.value = null;
+    if (areaPara.length.length !== 0) {
+      this.getCoords();
+    }
+    this.queryEl.nativeElement.value = null;
+    this.areaEl.nativeElement.value = null;
   }
 }

@@ -16,7 +16,7 @@
   <tr>
     <th>Distance:</th>
     <td>
-      {{restaurant.location.distance + 'm'}}
+      {{restaurant.location.distance !== undefined ? restaurant.location.distance + 'm' : '/'}}
     </td>
   </tr>
 </table>
