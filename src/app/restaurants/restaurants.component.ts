@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -21,7 +21,6 @@ export class RestaurantsComponent implements OnInit {
   radius:number = 2000;
   showMap:boolean = false;
   errMsg:boolean = false;
-  query:string;
 
   constructor(private store:Store<fromApp.AppState>, private http:HttpClient) { }
 
@@ -70,6 +69,7 @@ export class RestaurantsComponent implements OnInit {
     }))
     if (areaPara.length.length !== 0) {
       this.getCoords();
+      this.errMsg = false;
     }
     this.queryEl.nativeElement.value = null;
     this.areaEl.nativeElement.value = null;
