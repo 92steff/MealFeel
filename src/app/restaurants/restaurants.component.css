@@ -31,11 +31,7 @@ form,
 
 .mapHolder {
     width:100%;
-<<<<<<< HEAD
-    border: 1x solid #454555;
-=======
     border: 2px solid #777;
->>>>>>> 2f29179bd8cf066f3fb7aabef9245c42d3c4693e
     border-radius:4px;
 }
 
