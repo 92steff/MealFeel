@@ -67,7 +67,7 @@ export class RestaurantsComponent implements OnInit {
       near: areaPara,
       radius: this.radius
     }))
-    if (areaPara.length.length !== 0) {
+    if (areaPara.length !== 0) {
       this.getCoords();
       this.errMsg = false;
     }
