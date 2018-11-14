@@ -8,7 +8,7 @@ export const CLEAR_SELECTED_RES = 'CLEAR_SELECTED_RES';
 export class FetchRestaurants implements Action {
     readonly type = FETCH_RESTAURANTS;
 
-    constructor(public payload:{query:string, lat:number, lng:number, radius:number}) {}
+    constructor(public payload:{query:string, lat:number, lng:number, near?:string, radius:number}) {}
 }
 
 export class SetRestaurants implements Action {

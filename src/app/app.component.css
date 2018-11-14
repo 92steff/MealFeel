@@ -44,7 +44,7 @@ a, a:hover {
 }
 
 .form-control:focus, button:focus {
-    border-color: inherit;
+    border-color: #777;
     -webkit-box-shadow: none;
     box-shadow: none;
 }

@@ -4,18 +4,22 @@
 
         <div class="margin-fix">
 
-            <form (ngSubmit)="searchForRestaurants()">
+            <form (ngSubmit)="searchForRestaurants()" class="form-inline">
                 <input 
                     type="search"
-                    placeholder="Search for: (eg. bakery, restaurant, fast food, etc...)"
+                    placeholder="Search for (eg. bakery, restaurant, fast food, etc...)"
                     class="form-control"
-                    #queryEl><button        
-                                type="submit" 
-                                class="btn btn-warning"
-                                style="border-top-left-radius: 0;
-                                       border-bottom-left-radius: 0;">
-                                Search
-                            </button>
+                    #queryEl>
+                <input 
+                    type="search"
+                    placeholder="City or district (optional)"
+                    class="form-control"
+                    #areaEl>
+                <button        
+                    type="submit" 
+                    class="btn btn-dark">
+                    Search
+                </button>
             </form>
             
         </div>
@@ -26,7 +30,7 @@
     <div class="col-md-6">
         
         <div class="margin-fix">
-            <button class="btn btn-warning form-control" type="button" (click)="onToggleMap()">Toggle Map</button>
+            <button class="btn btn-dark form-control" type="button" (click)="onToggleMap()">Toggle Map</button>
         </div>
         
         <ng-template [ngIf]="showMap">
@@ -52,6 +56,10 @@
 
     </div>
     
+</div>
+
+<div *ngIf="errMsg" class="location-warning">
+    <div class="text-danger">We need to know your location or city to determine nearest restaurants</div>
 </div>
     
 

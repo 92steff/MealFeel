@@ -86,7 +86,11 @@ a:hover {
 
     .holder {
         margin-right: 0;
+<<<<<<< HEAD
         margin-bottom:29px;
+=======
+        margin-bottom: 28px; 
+>>>>>>> 2f29179bd8cf066f3fb7aabef9245c42d3c4693e
     }
 }
 

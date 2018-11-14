@@ -40,10 +40,10 @@ export class AuthEffects {
                     (err) => {
                         const reason = Observable.of(err);
                         if (err.code === 'auth/weak-password') {
-                            this.authSevice.errMsg.next({passErr:reason});
+                            throw this.authSevice.errMsg.next({passErr:reason});
                         }   
                         else {
-                            this.authSevice.errMsg.next({emailErr:reason});
+                            throw this.authSevice.errMsg.next({emailErr:reason});
                         }
                     }
                 );
@@ -54,7 +54,7 @@ export class AuthEffects {
                 if (firebase.auth().currentUser) {
                     return firebase.auth().currentUser.getIdToken();
                 }
-                else return Object;
+                else return null;
             }
         )
         .mergeMap(
@@ -99,10 +99,10 @@ export class AuthEffects {
                         (err) => {
                             const reason = Observable.of(err);
                             if (err.code === 'auth/wrong-password') {
-                                this.authSevice.errMsg.next({passErr:reason});
+                                throw this.authSevice.errMsg.next({passErr:reason});
                             }
                             else {
-                                this.authSevice.errMsg.next({emailErr:reason});
+                                throw this.authSevice.errMsg.next({emailErr:reason});
                             }
                         }
                     ))
@@ -114,7 +114,7 @@ export class AuthEffects {
                         this.store.dispatch(new UserActions.GetUserInfo());
                         return firebase.auth().currentUser.getIdToken();
                     }
-                    else return Object;
+                    else return null;
                 }
             )
             .mergeMap(
