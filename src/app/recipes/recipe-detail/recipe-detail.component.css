@@ -33,22 +33,26 @@ button {
     text-align: right;
 }
 
-.grid-favorite:hover .star-empty{
-    content: url('../../../assets/star-filled.png');
+.grid-favorite > a {
+    color:#333;
 }
 
-.star {
+.grid-favorite:hover .cookie-empty{
+    content: url('../../../assets/cookie-full.png');
+}
+
+.cookie {
     width:30px;
     vertical-align: bottom;
     color:yellow;
 }
 
-.star-empty {
-    content: url('../../../assets/star-empty.png');
+.cookie-empty {
+    content: url('../../../assets/cookie-empty.png');
 }
 
-.star-full {
-    content: url('../../../assets/star-filled.png');
+.cookie-full {
+    content: url('../../../assets/cookie-full.png');
 }
 
 @media screen and (max-width:991px) {
@@ -71,5 +75,9 @@ button {
     .grid-heading {
         grid-column:1 / span 2;
         text-align: left;
+    }
+
+    .thumbnail {
+        margin:20px auto;
     }
 }
