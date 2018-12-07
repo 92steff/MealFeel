@@ -33,7 +33,7 @@ export class RecipeListComponent implements OnInit {
           this.choosenIngredients = state.ingredients;
         }
       )
-    this.onSearchRecipes();
+    // this.onSearchRecipes();
   }
 
   onTurnPage(dir) {

@@ -25,17 +25,28 @@ export function UserReducer(state=initialState, action: UserActions.UserActions)
                 ...state,
                 bookmarks: newBookmarks
             };
+        case UserActions.SET_USERNAME:
+            return {
+                ...state,
+                username:action.payload
+            };
         case UserActions.REMOVE_BOOKMARK:
             const splicedBookmarks = [...state.bookmarks];
             for (let i=0; i < splicedBookmarks.length; i++) {
                 if (action.payload.recipe.label === splicedBookmarks[i].recipe.label) {
                     splicedBookmarks.splice(i,1);
                 }
-            }
+            };
             return {
                 ...state,
                 bookmarks: splicedBookmarks
             };
-            default: return state;
+        case UserActions.USER_LOGOUT:
+            return {
+                ...state,
+                username: null,
+                bookmarks: []
+            };
+        default: return state;
     }
 }
