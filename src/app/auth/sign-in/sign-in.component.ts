@@ -32,18 +32,14 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.userSignInForm = new FormGroup({
-      'email': new FormControl(null, Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email]),
       'password': new FormControl(null, Validators.required)
     })
   }
 
-  setErrorMsg(err) {
-    return err && this.isFormSubmitted ? err : false;
-  }
-
   submitSignIn(form:FormGroup) {
     this.isFormSubmitted = true;
-    
+
     this.store.dispatch(
       new AuthActions.TrySignin({
         email: form.controls.email.value,

@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import { fromPromise } from 'rxjs/observable/fromPromise';
 import * as fromApp from '../../store/app.reducers';
 import * as AuthActions from './auth.actions';
 import * as UserActions from '../../user/store/user.actions';
@@ -16,6 +15,7 @@ import 'rxjs/add/observable/of';
 
 @Injectable()
 export class AuthEffects {
+private userData;
 
     @Effect()
     userSignup = this.actions$
@@ -26,58 +26,49 @@ export class AuthEffects {
             }
         )
         .switchMap(
-            (authData:{email:string, password:string, username:string}) => {
-                return firebase.auth().createUserWithEmailAndPassword(authData.email, authData.password)
-                .then(
-                    () => {
+            async (authData:{email:string, password:string, username:string}) => {
+                try {
+                    await firebase.auth().createUserWithEmailAndPassword(authData.email, authData.password);
                         firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
-                            email: authData.email,
-                            username: authData.username,
-                            password: authData.password
-                        })        
-                        localStorage.setItem('user', JSON.stringify(authData));
-                    },
-                    (err) => {
-                        const reason = Observable.of(err);
-                        if (err.code === 'auth/weak-password') {
-                            throw this.authSevice.errMsg.next({passErr:reason});
-                        }   
-                        else {
-                            throw this.authSevice.errMsg.next({emailErr:reason});
-                        }
+                        email: authData.email,
+                        username: authData.username,
+                        password: authData.password
+                    });
+                }
+                catch (err) {
+                    const reason = Observable.of(err);
+                    if (err.code === 'auth/weak-password') {
+                        this.authSevice.errMsg.next({ passErr: reason });
                     }
-                );
+                    else {
+                        this.authSevice.errMsg.next({ emailErr: reason });
+                    }
+                }
+                this.userData = authData;
             }
         )
         .switchMap(
             () => {
                 if (firebase.auth().currentUser) {
+                    localStorage.setItem('user', JSON.stringify(this.userData));
+                    this.store.dispatch(new UserActions.SetUsername(this.userData.username))
                     return firebase.auth().currentUser.getIdToken();
                 }
-                else return null;
+                else throw new Error('Something went wrong! :(');
             }
         )
         .mergeMap(
             (token:string) => {
-                if (token) {
-                    this.router.navigate(['/']);
-                    return [
-                        {
-                            type: AuthActions.USER_SIGNIN
-                        },
-                        {
-                            type: AuthActions.SET_TOKEN,
-                            payload: token
-                        }
-                    ] 
-                } 
-                else {
-                    return [ 
-                        {
-                            type: AuthActions.INVALID_TRY
-                        }
-                    ]
-                }
+                this.router.navigate(['/']);
+                return [
+                    {
+                        type: AuthActions.USER_SIGNIN
+                    },
+                    {
+                        type: AuthActions.SET_TOKEN,
+                        payload: token
+                    }
+                ] 
             } 
         )
 
@@ -90,65 +81,63 @@ export class AuthEffects {
                 }
             )
             .switchMap(
-                (authData:{email:string, password:string}) => {
-                    return fromPromise(firebase.auth().signInWithEmailAndPassword(authData.email, authData.password)
-                    .then( 
-                        () => {
-                            localStorage.setItem('user', JSON.stringify(authData));
-                        },
-                        (err) => {
-                            const reason = Observable.of(err);
-                            if (err.code === 'auth/wrong-password') {
-                                throw this.authSevice.errMsg.next({passErr:reason});
-                            }
-                            else {
-                                throw this.authSevice.errMsg.next({emailErr:reason});
-                            }
+                async (authData:{email:string, password:string}) => {
+                    try {
+                        await firebase.auth().signInWithEmailAndPassword(authData.email, authData.password);
+                    }
+                    catch (err) {
+                        const reason = Observable.of(err);
+                        if (err.code === 'auth/wrong-password') {
+                            this.authSevice.errMsg.next({ passErr: reason });
                         }
-                    ))
+                        else {
+                            this.authSevice.errMsg.next({ emailErr: reason });
+                        }
+                        throw new Error(err);
+                    }
+                    this.userData = authData;
                 }
             )
             .switchMap(
                 () => {
                     if (firebase.auth().currentUser) {
                         this.store.dispatch(new UserActions.GetUserInfo());
+                        localStorage.setItem('user', JSON.stringify(this.userData));
                         return firebase.auth().currentUser.getIdToken();
                     }
-                    else return null;
+                    else throw new Error('Something went wrong! :(');
                 }
             )
             .mergeMap(
                 (token:string) => {
-                    if (token) {        
-                        this.router.navigate(['/']);
-                        return [
-                            {
-                                type: AuthActions.USER_SIGNIN
-                            },
-                            {
-                                type: AuthActions.SET_TOKEN,
-                                payload: token
-                            }
-                        ]
-                    }
-                    else {
-                        return [ 
-                            {
-                                type: AuthActions.INVALID_TRY
-                            }
-                        ]
-                    }
+                    this.router.navigate(['/']);
+                    return [
+                        {
+                            type: AuthActions.USER_SIGNIN
+                        },
+                        {
+                            type: AuthActions.SET_TOKEN,
+                            payload: token
+                        }
+                    ]
                 } 
             )
 
-        @Effect({dispatch:false})
+        @Effect()
         userLogout = this.actions$
             .ofType(AuthActions.LOGOUT)
-            .do(
+            .map(
                 () => {
                     firebase.auth().signOut();
                     localStorage.removeItem('user');
                     this.router.navigate(['/']);
+                }
+            )
+            .map(
+                () => {
+                    return {
+                        type: UserActions.USER_LOGOUT
+                    }
                 }
             )
 

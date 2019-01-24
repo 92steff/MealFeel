@@ -25,10 +25,8 @@ export function AuthReducer(state=initialState, action:AuthActions.AuthActions) 
         case AuthActions.LOGOUT:
             return {
                 ...state,
-                username:null,
                 token:null,
-                authenticated:false,
-                bookmarks: []
+                authenticated:false
             };
         default: return state;
     }

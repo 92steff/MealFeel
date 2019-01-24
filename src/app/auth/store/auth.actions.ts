@@ -5,7 +5,6 @@ export const TRY_SIGNIN = 'TRY_SIGNIN';
 export const USER_SIGNIN = 'USER_SIGNIN';
 export const SET_TOKEN = 'SET_TOKEN';
 export const LOGOUT = 'LOGOUT';
-export const INVALID_TRY = 'INVALID_TRY';
 
 export class TrySignup implements Action {
     readonly type = TRY_SIGNUP;
@@ -33,14 +32,9 @@ export class Logout implements Action {
     readonly type = LOGOUT;
 }
 
-export class InvalidTry implements Action {
-    readonly type = INVALID_TRY;
-}
-
 export type AuthActions = 
     TrySignup | 
     UserSignin | 
     TrySignin | 
     SetToken | 
-    Logout | 
-    InvalidTry;
+    Logout;
