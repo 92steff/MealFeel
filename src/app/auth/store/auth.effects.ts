@@ -34,17 +34,17 @@ private userData;
                         username: authData.username,
                         password: authData.password
                     });
-                    this.userData = authData;
                 }
                 catch (err) {
                     const reason = Observable.of(err);
                     if (err.code === 'auth/weak-password') {
-                        throw this.authSevice.errMsg.next({ passErr: reason });
+                        this.authSevice.errMsg.next({ passErr: reason });
                     }
                     else {
-                        throw this.authSevice.errMsg.next({ emailErr: reason });
+                        this.authSevice.errMsg.next({ emailErr: reason });
                     }
                 }
+                this.userData = authData;
             }
         )
         .switchMap(
@@ -84,17 +84,18 @@ private userData;
                 async (authData:{email:string, password:string}) => {
                     try {
                         await firebase.auth().signInWithEmailAndPassword(authData.email, authData.password);
-                        this.userData = authData;
                     }
                     catch (err) {
                         const reason = Observable.of(err);
                         if (err.code === 'auth/wrong-password') {
-                            throw this.authSevice.errMsg.next({ passErr: reason });
+                            this.authSevice.errMsg.next({ passErr: reason });
                         }
                         else {
-                            throw this.authSevice.errMsg.next({ emailErr: reason });
+                            this.authSevice.errMsg.next({ emailErr: reason });
                         }
+                        throw new Error(err);
                     }
+                    this.userData = authData;
                 }
             )
             .switchMap(

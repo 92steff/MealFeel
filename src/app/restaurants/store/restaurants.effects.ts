@@ -8,8 +8,6 @@ import * as RestaurantsActions from './restaurants.actions';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
-import { nearer } from 'q';
-
 
 @Injectable()
 export class RestaurantsEffects {
