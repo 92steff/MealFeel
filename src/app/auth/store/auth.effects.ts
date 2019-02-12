@@ -1,4 +1,4 @@
-import { Effect, Actions } from '@ngrx/effects';
+import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth.service';
@@ -12,6 +12,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class AuthEffects {
@@ -54,21 +55,23 @@ private userData;
                     this.store.dispatch(new UserActions.SetUsername(this.userData.username))
                     return firebase.auth().currentUser.getIdToken();
                 }
-                else throw new Error('Something went wrong! :(');
+                return [];
             }
         )
         .mergeMap(
             (token:string) => {
-                this.router.navigate(['/']);
-                return [
-                    {
-                        type: AuthActions.USER_SIGNIN
-                    },
-                    {
-                        type: AuthActions.SET_TOKEN,
-                        payload: token
-                    }
-                ] 
+                if (token) {
+                    this.router.navigate(['/']);
+                    return [
+                        {
+                            type: AuthActions.USER_SIGNIN
+                        },
+                        {
+                            type: AuthActions.SET_TOKEN,
+                            payload: token
+                        }
+                    ] 
+                }                
             } 
         )
 
@@ -93,7 +96,6 @@ private userData;
                         else {
                             this.authSevice.errMsg.next({ emailErr: reason });
                         }
-                        throw new Error(err);
                     }
                     this.userData = authData;
                 }
@@ -105,21 +107,30 @@ private userData;
                         localStorage.setItem('user', JSON.stringify(this.userData));
                         return firebase.auth().currentUser.getIdToken();
                     }
-                    else throw new Error('Something went wrong! :(');
+                    return [];
                 }
             )
             .mergeMap(
                 (token:string) => {
-                    this.router.navigate(['/']);
-                    return [
-                        {
-                            type: AuthActions.USER_SIGNIN
-                        },
-                        {
-                            type: AuthActions.SET_TOKEN,
-                            payload: token
-                        }
-                    ]
+                    if (token) {
+                        this.router.navigate(['/']);
+                        return [
+                            {
+                                type: AuthActions.USER_SIGNIN
+                            },
+                            {
+                                type: AuthActions.SET_TOKEN,
+                                payload: token
+                            }
+                        ]
+                    }
+                    else {
+                        return [ 
+                            {
+                                type:AuthActions.LOGOUT
+                            }
+                        ]
+                    }
                 } 
             )
 
@@ -131,10 +142,6 @@ private userData;
                     firebase.auth().signOut();
                     localStorage.removeItem('user');
                     this.router.navigate(['/']);
-                }
-            )
-            .map(
-                () => {
                     return {
                         type: UserActions.USER_LOGOUT
                     }
