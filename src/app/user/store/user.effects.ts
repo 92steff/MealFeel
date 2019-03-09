@@ -24,7 +24,7 @@ export class UserEffects {
             }
         )
         .switchMap(
-            (username) => {
+            (username) => {                
                 this.username = username;
                 const db = firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/bookmarks');
                 const bms = db.once('value').then((snapshot) => {
