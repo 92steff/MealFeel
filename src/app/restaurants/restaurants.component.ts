@@ -18,7 +18,7 @@ export class RestaurantsComponent implements OnInit {
   restaurantsState:Observable<fromRestaurants.State>;
   lat:number;
   lng:number;
-  radius:number = 2000;
+  radius:number = 5000;
   showMap:boolean = false;
   errMsg:boolean = false;
 

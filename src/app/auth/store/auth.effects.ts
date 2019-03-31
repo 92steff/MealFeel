@@ -9,12 +9,14 @@ import * as AuthActions from './auth.actions';
 import * as UserActions from '../../user/store/user.actions';
 import * as firebase from 'firebase';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
+
 export class AuthEffects {
 private userData;
 
