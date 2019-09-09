@@ -26,7 +26,7 @@ import { RestaurantsListComponent } from './restaurants-list/restaurants-list.co
         StoreModule.forFeature('restaurants', RestaurantsReducer),
         EffectsModule.forFeature([RestaurantsEffects]),
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyBPRtyp621J7qXoAHd7DUGUXAV3lER-KYc'
+            apiKey: 'AIzaSyDuS3MZKX7uRyRPThcuPMDO4Kp5j77fpHU'
           }),
     ]
 })

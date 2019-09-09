@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
-
+import { environment } from '../../../environments/environment';
 import * as RestaurantsActions from './restaurants.actions';
 
 import 'rxjs/add/operator/map';
@@ -32,8 +32,8 @@ export class RestaurantsEffects {
                 return this.httpClient.get('https://api.foursquare.com/v2/venues/search?', {
                     observe: 'body',
                     responseType: 'json',
-                    params: new HttpParams().set('client_id', 'CF00V4VUDHU1BQBUEOBJ1GMEKLOWTQKTGNNBS5AMKUIOLROY')
-                                            .set('client_secret', '0KGHKBEEDJWDUXJOJTBNRUR0ABTD00EC4ASDFSDP3TVWBR2G')
+                    params: new HttpParams().set('client_id', environment.foursquare.clientID)
+                                            .set('client_secret', environment.foursquare.clientSecret)
                                             .set('v', '20180323')
                                             .set('query', searchData.query)
                                             .set(latLng !== undefined ? 'll' : 'near', latLng !== undefined ? latLng : searchData.near)

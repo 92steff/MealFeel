@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../../environments/environment';
 import * as fromApp from '../store/app.reducers';
 import * as RestaurantsActions from './store/restaurants.actions';
 import * as fromRestaurants from './store/restaurants.reducer';
@@ -45,10 +46,11 @@ export class RestaurantsComponent implements OnInit {
   getCoords() {
     this.http.get('https://maps.googleapis.com/maps/api/geocode/json?', {
       params: new HttpParams().set('address', this.areaEl.nativeElement.value)
-                              .set('key', 'AIzaSyBKQGeXCepsr3eWfUfi-7utORwYSVRd3b0')
+                              .set('key', environment.agmApi)
     })
     .subscribe(
       (response) => {
+        console.log(response)
         const position = response['results'][0].geometry.location;
         this.lat = position.lat;
         this.lng = position.lng;

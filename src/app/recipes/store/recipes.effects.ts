@@ -1,6 +1,7 @@
 import { Effect, Actions } from '@ngrx/effects';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import * as RecipesActions from './recipes.actions';
 
 import 'rxjs/add/operator/map';
@@ -23,8 +24,8 @@ export class RecipeEffects {
                     observe: 'body',
                     responseType: 'json',
                     params: new HttpParams().set('q', ingredients)
-                                            .set('app_id', 'daa673ca')
-                                            .set('app_key', '608b42477eef1e0eea7e7d6087e8c6ea')
+                                            .set('app_id', environment.edamam.appID)
+                                            .set('app_key', environment.edamam.appKey)
                                             .set('from', reqData.fromIndex.toString())
                                             .set('to', reqData.toIndex.toString()),
                     headers: new HttpHeaders().set('Content-Type', 'text/json')
