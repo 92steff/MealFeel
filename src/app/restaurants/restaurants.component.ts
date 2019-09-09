@@ -50,7 +50,6 @@ export class RestaurantsComponent implements OnInit {
     })
     .subscribe(
       (response) => {
-        console.log(response)
         const position = response['results'][0].geometry.location;
         this.lat = position.lat;
         this.lng = position.lng;

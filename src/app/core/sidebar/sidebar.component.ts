@@ -34,8 +34,17 @@ export class SidebarComponent implements OnInit {
   }
 
   onSearchRecipes() {
-    this.store.dispatch(new RecipesActions.SetIngredients(this.ingArr));
-    this.router.navigate(['recipes']);
+    if (this.router.url !== '/recipes') {
+      this.store.dispatch(new RecipesActions.SetIngredients(this.ingArr));
+      this.router.navigate(['recipes']);
+    } else {
+      this.store.dispatch(new RecipesActions.FetchRecipes({
+        ingredientsArray: this.ingArr,
+        fromIndex: 0,
+        toIndex: 1
+      }));
+    }
+    
   }
 
 }

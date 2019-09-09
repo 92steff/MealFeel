@@ -16,8 +16,8 @@ import * as RecipesAction from '../store/recipes.actions';
 export class RecipeListComponent implements OnInit {
   recipesState:Observable<fromRecipe.State>;
   queryIndexFrom:number = 0;
-  queryIndexTo:number = 8;
-  numOfDisplays:number = 8;
+  queryIndexTo:number = 1;
+  numOfDisplays:number = 1;
   dummyIngredients = ['chicken', 'ice-cream', 'potato', 'sandwich', 'tomato', 'salad'];
   choosenIngredients:string[] = [];
   isInRecipes:boolean;
