@@ -41,7 +41,7 @@ export class SidebarComponent implements OnInit {
       this.store.dispatch(new RecipesActions.FetchRecipes({
         ingredientsArray: this.ingArr,
         fromIndex: 0,
-        toIndex: 1
+        toIndex: 8
       }));
     }
     
