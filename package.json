@@ -24,7 +24,7 @@
     "@angular/router": "^5.2.0",
     "@ngrx/effects": "^5.2.0",
     "@ngrx/store": "^5.2.0",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "circular-json": "^0.5.5",
     "core-js": "^2.4.1",
     "firebase": "^5.0.4",
